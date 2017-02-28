@@ -2,6 +2,8 @@
   "name": "botler",
   "version": "0.0.1",
   "description": "",
+  "author": "Eduardo Pilla Portilho",
+  "license": "AGPL-3.0",
   "main": "index.js",
   "dependencies": {
     "botpress": "0.x",
@@ -11,6 +13,7 @@
     "start": "botpress start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Eduardo Pilla Portilho",
-  "license": "AGPL-3.0"
+    "engines": {
+    "node": "7.1.0"
+  }
 }
