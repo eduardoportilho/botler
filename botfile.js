@@ -9,7 +9,7 @@ module.exports = {
 
   modulesConfigDir: process.env.BOTPRESS_CONFIG_DIR || "./modules_config",
   disableFileLogs: false,
-  port: process.env.PORT,
+  port: process.env.PORT || 3000,
   optOutStats: false,
   notification: {
     file: 'notifications.json',
