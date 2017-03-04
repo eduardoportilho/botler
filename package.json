@@ -1,19 +1,23 @@
 {
   "name": "botler",
   "version": "0.0.1",
-  "description": "",
+  "description": "Your personal botler",
   "author": "Eduardo Pilla Portilho",
   "license": "AGPL-3.0",
   "main": "index.js",
   "dependencies": {
-    "botpress": "0.x",
+    "botpress": "^0.1.3",
     "botpress-messenger": "^1.0.19"
   },
   "scripts": {
     "start": "botpress start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-    "engines": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eduardoportilho/botler"
+  },
+  "engines": {
     "node": "7.1.0"
   }
 }
