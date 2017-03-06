@@ -19,17 +19,20 @@ module.exports = function(bp) {
       .value()
 
     trafikverket.getDepartures.apply(this, commandTokens).then((departures) => {
-      var departuresString = 
-        _.reduce(departures, (string, departure) => {
-         return string + `Train ${departure.train} departing at ${departure.time} to ${departure.destination}\n`
-        }, "")
-
       var message = `SJ departures from '${commandTokens[0]}'`
       if (commandTokens.length > 1) {
         message += ` to '${commandTokens[1]}'`
       }
-      message += `:\n${departuresString}`
+      message += ':'
       bp.messenger.sendText(event.user.id, message, { typing: true })
+
+      var departuresString = _.forEach(departures, (departure) => {
+        bp.messenger.sendText(
+          event.user.id, 
+          `Train ${departure.train} departing at ${departure.time} to ${departure.destination}`,
+          { typing: true }
+        )
+      })
     })
   })
 }
