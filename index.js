@@ -26,13 +26,17 @@ module.exports = function(bp) {
       message += ':'
       bp.messenger.sendText(event.user.id, message, { typing: true })
 
-      var departuresString = _.forEach(departures, (departure) => {
-        bp.messenger.sendText(
-          event.user.id, 
-          `Train ${departure.train} departing at ${departure.time} to ${departure.destination}`,
-          { typing: true }
-        )
-      })
+      var departuresString = _.chain(departures)
+        .filter((departure) => {
+          return !_.isUndefined(departure.time) && !_.isUndefined(departure.destination)
+        })
+        .forEach(departures, (departure) => {
+          bp.messenger.sendText(
+            event.user.id, 
+            `Train ${departure.train} departing at ${departure.time} to ${departure.destination}`,
+            { typing: true }
+          )
+        })
     })
   })
 }
