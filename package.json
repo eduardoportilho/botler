@@ -9,7 +9,7 @@
     "botpress": "^0.1.3",
     "botpress-messenger": "^2.0.5",
     "lodash": "^4.17.4",
-    "trafikverket": "^1.1.0"
+    "trafikverket": "^1.1.1"
   },
   "scripts": {
     "start": "botpress start",
