@@ -21,7 +21,7 @@ module.exports = function(bp) {
       departures.forEach((departure) => {
           bp.messenger.sendText(
             event.user.id, 
-            `Train ${departure.train} departing at ${departure.time} to ${departure.destination}`,
+            `Train ${departure.train} departing at ${departure.time} to ${departure.destination} stoping at: ${departure.via.join(', ')}`,
             { typing: true }
           )
         })
