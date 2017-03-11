@@ -27,6 +27,11 @@ module.exports = function(bp) {
         })
     })
   })
+
+  bp.sayHelloToUsers = () => {
+    let userId = '1110522745724783';
+    bp.messenger.sendText(userId, 'Hello! Mr. Botler here.')
+  }
 }
 
 function getDeparturesMessage(commandTokens) {
