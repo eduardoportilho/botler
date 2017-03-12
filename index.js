@@ -9,13 +9,21 @@ module.exports = function(bp) {
     bp.messenger.sendText(event.user.id, 'Hello, ' + first_name, { typing: true })
   })
 
-
   bp.hear(/^sj\s/i, (event, next) => { // We use a regex instead of a hardcoded string
-    const commandTokens = _.chain(event.text)
+    onUserTextMessage(event.user.id, event.text)
+  })
+   
+  bp.recurringTask = () => {
+    let userId = '1110522745724783'
+    onUserTextMessage(userId, 'sj Fle Cst')
+  }
+  
+  function onUserTextMessage(userId, text) {
+    const commandTokens = _.chain(text)
       .split(' ')
       .drop()
       .value()
-    bp.messenger.sendText(event.user.id, getDeparturesMessage(commandTokens), { typing: true })
+    bp.messenger.sendText(userId, getDeparturesMessage(commandTokens), { typing: true })
 
     trafikverket.getDepartures.apply(this, commandTokens).then((departures) => {
       departures.forEach((departure) => {
@@ -26,11 +34,6 @@ module.exports = function(bp) {
           )
         })
     })
-  })
-
-  bp.sayHelloToUsers = () => {
-    let userId = '1110522745724783';
-    bp.messenger.sendText(userId, 'Hello! Mr. Botler here.')
   }
 }
 
