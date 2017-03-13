@@ -1,5 +1,6 @@
 const trafikverket = require('trafikverket')
 const _ = require('lodash')
+const later = require('later')
 
 module.exports = function(bp) {
   bp.middlewares.load()
@@ -18,7 +19,7 @@ module.exports = function(bp) {
       {
         userId: '1110522745724783',
         command: 'sj Fle Cst',
-        when: 'Weekdays at 06:30'
+        when: 'Every weekday at 06:30'
       }
     ]
 
@@ -48,9 +49,11 @@ module.exports = function(bp) {
   }
 }
 
-function isTimeMatch(recurringStatement) {
-  // TODO: implement recurring time matching
-  return true
+function isTimeMatch(recurringExpression) {
+  later.date.localTime()
+  const sched = later.parse.text(recurringExpression)
+  // TODO: consider last execution and next execution to round the dates
+  return sched.isValid(new Date());
 }
 
 function getDeparturesMessage(commandTokens) {
