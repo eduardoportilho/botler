@@ -10,15 +10,26 @@ module.exports = function(bp) {
   })
 
   bp.hear(/^sj\s/i, (event, next) => { // We use a regex instead of a hardcoded string
-    onUserTextMessage(event.user.id, event.text)
+    handleUserTextMessage(event.user.id, event.text)
   })
    
   bp.recurringTask = () => {
-    let userId = '1110522745724783'
-    onUserTextMessage(userId, 'sj Fle Cst')
+    let tasks = [
+      {
+        userId: '1110522745724783',
+        command: 'sj Fle Cst',
+        when: 'Weekdays at 06:30'
+      }
+    ]
+
+    tasks.forEach((task) => {
+      if (isTimeMatch(task.when)) {
+        handleUserTextMessage(task.userId, task.command)
+      }
+    })
   }
   
-  function onUserTextMessage(userId, text) {
+  function handleUserTextMessage(userId, text) {
     const commandTokens = _.chain(text)
       .split(' ')
       .drop()
@@ -35,6 +46,11 @@ module.exports = function(bp) {
         })
     })
   }
+}
+
+function isTimeMatch(recurringStatement) {
+  // TODO: implement recurring time matching
+  return true
 }
 
 function getDeparturesMessage(commandTokens) {
