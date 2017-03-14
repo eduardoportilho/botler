@@ -1,6 +1,6 @@
 const trafikverket = require('trafikverket')
 const _ = require('lodash')
-const later = require('later')
+const recurring = require('./recurring')
 
 module.exports = function(bp) {
   bp.middlewares.load()
@@ -24,7 +24,7 @@ module.exports = function(bp) {
     ]
 
     tasks.forEach((task) => {
-      if (isTimeMatch(task.when)) {
+      if (recurring.isTimeInRecurring(task.when, new Date())) {
         handleUserTextMessage(task.userId, task.command)
       }
     })
@@ -47,13 +47,6 @@ module.exports = function(bp) {
         })
     })
   }
-}
-
-function isTimeMatch(recurringExpression) {
-  later.date.localTime()
-  const sched = later.parse.text(recurringExpression)
-  // TODO: consider last execution and next execution to round the dates
-  return sched.isValid(new Date());
 }
 
 function getDeparturesMessage(commandTokens) {
