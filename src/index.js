@@ -36,13 +36,13 @@ module.exports = function(bp) {
       .split(' ')
       .drop()
       .value()
-    bp.messenger.sendText(userId, getDeparturesMessage(commandTokens), { typing: true })
+    bp.messenger.sendText(userId, messaging.getDeparturesIntoMessage(commandTokens), { typing: true })
 
     trafikverket.getDepartures.apply(this, commandTokens).then((departures) => {
       departures.forEach((departure) => {
           bp.messenger.sendText(
             event.user.id, 
-            `Train ${departure.train} departing at ${departure.time} to ${departure.destination} stoping at: ${departure.via.join(', ')}`,
+            messaging.getDepartureAnnouncementMessage(departure),
             { typing: true }
           )
         })
