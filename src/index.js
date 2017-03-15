@@ -15,8 +15,25 @@ module.exports = function(bp) {
     handleUserTextMessage(event.user.id, event.text)
   })
    
-  bp.recurringTask = (interval, bp, schedule) => {
-    console.log('recurringTask:', interval, bp, schedule)
+  /**
+   * Function called by botpress-scheduler
+   * @param  {Object} schedule botpress-scheduler schedule
+   * @param  {number} schedule.taskId - Numeric id
+   * @param  {string} schedule.id - Text id
+   * @param  {string} schedule.scheduleId - Text id
+   * @param  {Date} schedule.scheduledOn - Executing date
+   * @param  {string} schedule.status - Status (e.g. 'pending')
+   * @param  {string} schedule.logs
+   * @param  {Date} schedule.finishedOn
+   * @param  {Object} schedule.returned
+   * @param  {boolean} schedule.enabled
+   * @param  {string} schedule.schedule_type - Schedule type (e.g. 'natural')
+   * @param  {string} schedule.schedule - Schedule text
+   * @param  {string} schedule.schedule_human - Schedule human text
+   * @param  {Date} schedule.created_on
+   * @param  {string} schedule.action - Task source code
+   */ 
+  bp.recurringTask = (intervalInMinutes, schedule) => {
     let tasks = [
       {
         userId: '1110522745724783',
