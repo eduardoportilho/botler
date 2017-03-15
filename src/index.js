@@ -1,6 +1,7 @@
 const trafikverket = require('trafikverket')
-const _ = require('lodash')
 const recurring = require('./recurring')
+const messaging = require('./messaging')
+const _ = require('lodash')
 
 module.exports = function(bp) {
   bp.middlewares.load()
@@ -47,13 +48,4 @@ module.exports = function(bp) {
         })
     })
   }
-}
-
-function getDeparturesMessage(commandTokens) {
-  var message = `SJ departures from '${commandTokens[0]}'`
-  if (commandTokens.length > 1) {
-    message += ` to '${commandTokens[1]}'`
-  }
-  message += ':'
-  return message
 }
