@@ -46,7 +46,10 @@ module.exports = function(bp) {
 
     tasks.forEach((task) => {
       if (recurring.isTimeInRecurring(task.when, toleranceInMinutes, new Date())) {
+        console.log(`>>> Recurring task time match at ${new Date()}.`)
         handleUserTextMessage(task.userId, task.command)
+      } else {
+        console.log('>>> Recurring task miss.')
       }
     })
   }
