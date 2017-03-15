@@ -15,7 +15,8 @@ module.exports = function(bp) {
     handleUserTextMessage(event.user.id, event.text)
   })
    
-  bp.recurringTask = () => {
+  bp.recurringTask = (interval, bp, schedule) => {
+    console.log('recurringTask:', interval, bp, schedule)
     let tasks = [
       {
         userId: '1110522745724783',
@@ -25,7 +26,7 @@ module.exports = function(bp) {
     ]
 
     tasks.forEach((task) => {
-      if (recurring.isTimeInRecurring(task.when, new Date())) {
+      if (recurring.isTimeInRecurring(task.when, interval, new Date())) {
         handleUserTextMessage(task.userId, task.command)
       }
     })
