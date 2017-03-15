@@ -26,6 +26,21 @@ describe('[recurring.js]', function() {
       expect(isInRecurring).to.be.true;
     })
 
+    it('"Every weekday at 06:35" expression should return true with 5 min tolerance', function() {
+      let isInRecurring = recurring.isTimeInRecurring('Every weekday at 06:35', 5)
+      expect(isInRecurring).to.be.true;
+    })
+
+    it('"Every weekday at 06:25" expression should return true with 5 min tolerance', function() {
+      let isInRecurring = recurring.isTimeInRecurring('Every weekday at 06:25', 5)
+      expect(isInRecurring).to.be.true;
+    })
+
+    it('"Every weekday at 06:24" expression should return false with 5 min tolerance', function() {
+      let isInRecurring = recurring.isTimeInRecurring('Every weekday at 06:24', 5)
+      expect(isInRecurring).to.be.false;
+    })
+
     it('"Every weekend" expression should return false', function() {
       let isInRecurring = recurring.isTimeInRecurring('Every weekend')
       expect(isInRecurring).to.be.false;
