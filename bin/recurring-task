@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+console.log('>>> Waking up the dynos...')
+var bp = require('botpress')
