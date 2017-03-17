@@ -1,4 +1,4 @@
-#!/usr/bin/env node
-
-console.log('>>> Waking up the dynos...')
-var bp = require('botpress')
+#!/usr/bin/env sh
+echo ">>> Starting recurring tasks..."
+curl https://mrbotler.herokuapp.com
+echo ">>> Ending recurring tasks..."
