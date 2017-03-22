@@ -12,7 +12,7 @@
     "later": "^1.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
-    "trafikverket": "^1.1.1"
+    "trafikverket": "^1.1.2"
   },
   "scripts": {
     "start": "botpress start",
