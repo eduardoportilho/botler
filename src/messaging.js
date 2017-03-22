@@ -9,6 +9,12 @@ module.exports = {
   },
 
   getDepartureAnnouncementMessage: (departure) => {
-    return `Train ${departure.train} departing at ${departure.time} to ${departure.destination} stoping at: ${departure.via.join(', ')}`
+    var message = `Train ${departure.train}` + 
+      ` at ${departure.time}`
+    if (departure.estimatedTime) {
+      message +=  ` (est. ${departure.estimatedTime})`  
+    }
+    message +=  ` to ${departure.destination}` + 
+      ` stoping at: ${departure.via.join(', ')}`
   }
 }

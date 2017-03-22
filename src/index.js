@@ -12,7 +12,11 @@ module.exports = function(bp) {
   })
 
   bp.hear(/^sj\s/i, (event, next) => { // We use a regex instead of a hardcoded string
-    handleUserTextMessage(event.user.id, event.text)
+    let commandTokens = _.chain(event.text)
+      .split(' ')
+      .drop()
+      .value()
+    handleSjMessage(event.user.id, commandTokens)
   })
    
   /**
@@ -54,11 +58,7 @@ module.exports = function(bp) {
     })
   }
   
-  function handleUserTextMessage(userId, text) {
-    const commandTokens = _.chain(text)
-      .split(' ')
-      .drop()
-      .value()
+  function handleSjMessage(userId, commandTokens) {
     bp.messenger.sendText(userId, messaging.getDeparturesIntoMessage(commandTokens), { typing: true })
 
     trafikverket.getDepartures.apply(this, commandTokens).then((departures) => {
